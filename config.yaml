@@ -1,0 +1,7 @@
+network:
+  range: 10.122.12/24
+  gateway: 168.58.74.12
+db:
+  url: https://db.cocroach.net
+  port: 122
+  
