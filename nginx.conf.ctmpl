@@ -1,0 +1,16 @@
+upstream tm2route {
+{{- range service "tm2-sm" }}
+  server {{ .Address }}:{{ .Port }};
+{{- end }}
+}
+
+server {
+  listen 80;
+  listen 443 ssl;
+  server_name  tm2-sm.ingress.default.primary.mesh.csob.zons.dev;
+
+  location / {
+      proxy_set_header X-Forwarded-Host tm2-sm.ingress.default.primary.mesh.csob.zons.dev;
+      proxy_pass https://tm2route;
+  }
+}
